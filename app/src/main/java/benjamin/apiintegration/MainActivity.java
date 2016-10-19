@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,12 +16,25 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static EditText emailText;
+    private static TextView responseView;
+    private static ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        emailText = (EditText) findViewById(R.id.emailText);
+        responseView = (TextView) findViewById(R.id.responseView);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        Log.i("VIEW", "emailText" + emailText);
+        Log.i("VIEW", "responseView: " + responseView);
+        Log.i("VIEW", "progressBar: " + progressBar);
 
         Button btn = (Button) findViewById(R.id.queryButton);
-        btn.setOnClickListener(new View.OnClickListener() {
+       btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RetrieveFeedTask rft = new RetrieveFeedTask(getEmailText());
@@ -30,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        setContentView(R.layout.activity_main);
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -68,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public ProgressBar getProgressBar() {
-        return (ProgressBar) findViewById(R.id.progressBar);
+        return progressBar;
     }
 
     public TextView getResponseView () {
-        return (TextView) findViewById(R.id.responseView);
+        return responseView;
     }
 
     public EditText getEmailText () {
-        return (EditText) findViewById(R.id.emailText);
+        return emailText;
     }
 }

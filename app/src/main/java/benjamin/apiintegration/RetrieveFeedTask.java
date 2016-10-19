@@ -29,6 +29,7 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     public RetrieveFeedTask (EditText emailText) {
         mainActivity = new MainActivity();
         progressBar = mainActivity.getProgressBar();
+        Log.i("CONSTRUCTOR", "progressBar: " + progressBar);
         responseView = mainActivity.getResponseView();
         this.emailText = emailText.getText().toString();
 
@@ -37,6 +38,7 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
 
     protected void onPreExecute() {
+        Log.i("ONPREEXECUTE", "Made it into the other thread");
         progressBar.setVisibility(View.VISIBLE);
         responseView.setText("");
     }
@@ -72,11 +74,11 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
     }
 
     protected void onPostExecute(String response) {
+        Log.i("ONPOSTEXECUTE", "Made it into the other thread");
         if(response == null) {
             response = "THERE WAS AN ERROR";
         }
         progressBar.setVisibility(View.GONE);
-        Log.i("INFO", response);
         responseView.setText(response);
     }
 }
